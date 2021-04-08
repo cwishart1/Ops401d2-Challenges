@@ -12,7 +12,7 @@ import os, time, datetime, smtplib
 # Mail setup and login
 server = smtplib.SMTP_SSL('smtp.gmail.com', 465) 
 #server.ehlo()
-server.login('tt4626970@gmail.com', 'po-ta-tos boil em mash em stick em in a stew')
+server.login('potato', 'potato') #insert gmail credentials
 destination = input("Input gmail address to send alerts to: ")
 
 # Variable
