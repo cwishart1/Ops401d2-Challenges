@@ -1,0 +1,82 @@
+#!/usr/bin/env python3
+
+# Script Name:                  Challenge-encryption
+# Class Name:                   Ops 401
+# Author Name:                  Cody Wishart
+# Date of latest revision:      4/13/21
+# Purpose:                      Encrypt or decrypt things
+
+# Possible Improvements:
+# Script readability
+# Encryption generated a file with the same name as the original (same with decryption)
+# Input sanitization
+# Use while loops to add the option of running other functions inside the UI
+
+
+# Import lib
+from cryptography.fernet import Fernet
+import os
+
+# Global var # Not sure if this section is needed, will review on next version 
+check1 = ()
+key = ()
+f = ()
+
+# Create key
+def writeKey():
+    key = Fernet.generate_key()
+    with open('key.key', 'wb') as keyFile:
+        keyFile.write(key) 
+
+# Load key
+def loadKey():
+    return open("key.key", "rb").read()
+
+# Preform cryptographic operation based on $check1 
+def crypt(check):
+    key = loadKey()
+    f = Fernet(key)
+    if check == 1: #encrypt file
+        toEncrypt0 = input("Enter file's directory to be encrypted: ")
+        with open(toEncrypt0, 'rb') as originalFile:
+            original = originalFile.read()
+        encrypt0 = f.encrypt(original) 
+        with open('encryptedFile', 'w') as encryptedFile:
+            encryptedFile.write(str(encrypt0.decode('utf-8')))
+        os.remove(toEncrypt0)
+    elif check == 2: #decrypt file
+        toDecrypt0 = input("Enter file's directory to be decrypted: ")
+        with open(toDecrypt0, 'rb') as originalFile:
+            original1 = originalFile.read()
+        decrypt0 = f.decrypt(original1)
+        with open('decryptedFile', 'w') as decryptedFile:
+            decryptedFile.write(str(decrypt0.decode('utf-8')))
+        os.remove(toDecrypt0)
+    elif check == 3: #encrypt msg
+        toEncrypt1 = input("Enter message to be encrypted: ")
+        x2 = toEncrypt1.encode()
+        encrypt1 = f.encrypt(x2)
+        print ("Encrypted message:")
+        print (encrypt1.decode('utf-8'))
+    elif check == 4: #decrypt msg
+        toDecrypt = input("Enter message to be decrypted: ")
+        x3 = toDecrypt.encode()
+        decrypt1 = f.decrypt(x3)
+        print ("Decrypted message:")
+        print (decrypt1.decode('utf-8'))
+    else: #tiny bit of input sanitization
+        print ("Invalid input")
+
+# Initialize UI
+def init():
+    check0 = input("Do you want to generate a new keyfile? WARNING: will overwrite old keyfile!\n(y/n): ")
+    if check0 == 'n':
+        print ("Generating key")
+        writeKey()
+    check1 = input("\nEncrypt a file (1)\nDecrypt a file (2)\nEncrypt a message (3)\nDecrypt a message (4)\nWhat operation would you like to preform? (1-4): ")
+    crypt(int(check1))
+
+# Main
+init()
+
+# End
