@@ -70,7 +70,7 @@ def crypt(check):
 # Initialize UI
 def init():
     check0 = input("Do you want to generate a new keyfile? WARNING: will overwrite old keyfile!\n(y/n): ")
-    if check0 == 'n':
+    if check0 == 'y':
         print ("Generating key")
         writeKey()
     check1 = input("\nEncrypt a file (1)\nDecrypt a file (2)\nEncrypt a message (3)\nDecrypt a message (4)\nWhat operation would you like to preform? (1-4): ")
