@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
-# Script Name:                  Challenge-encryption
+# Script Name:                  Challenge-encryption2
 # Class Name:                   Ops 401
 # Author Name:                  Cody Wishart
 # Date of latest revision:      4/13/21
-# Purpose:                      Encrypt or decrypt things
+# Purpose:                      Encrypt or decrypt directories
 
 # Possible Improvements:
 # Script readability
@@ -12,12 +12,13 @@
 # Input sanitization
 # Use while loops to add the option of running other functions inside the UI
 
+#### Functions 5 and 6 do NOT work, need os walk ####
 
 # Import lib
 from cryptography.fernet import Fernet
 import os
 
-# Global var # Not sure if this section is needed, will review on next version 
+# Global var # Not sure if this section is needed, will review on next version #
 check1 = ()
 key = ()
 f = ()
@@ -64,17 +65,38 @@ def crypt(check):
         decrypt1 = f.decrypt(x3)
         print ("Decrypted message:")
         print (decrypt1.decode('utf-8'))
+    elif check == 5: #encrypt a dir
+        dDir = input("Enter directory to be encrypted: ")
+        dirs = os.listdir(path=dDir)
+        for files in dirs:
+            with open(files, 'rb') as originalFile:
+                original = originalFile.read()
+            encrypt0 = f.encrypt(original) 
+            with open('encryptedFile', 'w') as encryptedFile:
+                encryptedFile.write(str(encrypt0.decode('utf-8')))
+            os.remove(files)
+    elif check == 6: #decrypt a dir
+        eDir = input("Enter directory to be decrypted: ")
+        dirs = os.listdir(path=eDir)
+        for files in dirs:
+            with open(toDecrypt0, 'rb') as originalFile:
+                original1 = originalFile.read()
+            decrypt0 = f.decrypt(original1)
+            with open('decryptedFile', 'w') as decryptedFile:
+                decryptedFile.write(str(decrypt0.decode('utf-8')))
+            os.remove(toDecrypt0)
     else: #tiny bit of input sanitization
         print ("Invalid input")
 
 # Initialize UI
 def init():
     check0 = input("Do you want to generate a new keyfile? WARNING: will overwrite old keyfile!\n(y/n): ")
-    if check0 == 'n':
+    if check0 == 'y':
         print ("Generating key")
         writeKey()
-    check1 = input("\nEncrypt a file (1)\nDecrypt a file (2)\nEncrypt a message (3)\nDecrypt a message (4)\nWhat operation would you like to preform? (1-4): ")
+    check1 = input("\nEncrypt a file (1)\nDecrypt a file (2)\nEncrypt a message (3)\nDecrypt a message (4)\nEncrypt a directory (5)\nDecrypt a directory (6)\nWhat operation would you like to preform? (1-4): ")
     crypt(int(check1))
+
 
 # Main
 init()
