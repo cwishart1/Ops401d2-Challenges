@@ -12,7 +12,7 @@
 # Input sanitization
 # Use while loops to add the option of running other functions inside the UI
 
-#### Functions 5 and 6 do NOT work, need os walk ####
+#### Functions 5 and 6 do NOT work ####
 
 # Import lib
 from cryptography.fernet import Fernet
