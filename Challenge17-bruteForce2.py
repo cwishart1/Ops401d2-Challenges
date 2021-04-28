@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Script Name:                  Challenge16-bruteForce2
+# Script Name:                  Challenge17-bruteForce2
 # Class Name:                   Ops 401
 # Author Name:                  Cody Wishart
 # Date of latest revision:      4/27/21
