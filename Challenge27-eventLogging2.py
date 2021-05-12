@@ -11,7 +11,8 @@
 # Import lib
 from cryptography.fernet import Fernet
 from logging.handlers import RotatingFileHandler
-import os, logging
+from logging.handlers import TimedRotatingFileHandler
+import os, logging, time
 
 # Global var # Not sure if this section is needed, will review on next version #
 check1 = ()
@@ -97,7 +98,7 @@ def init():
 
 # Logging System
 logger = logging.getLogger('my_logger')
-handler = RotatingFileHandler('log.log', maxBytes=200, backupCount=200) 
+handler = RotatingFileHandler('log.log', when="m", interval=1, backupCount=5)
 logger.addHandler(handler)
 
 logging.basicConfig(filename='./log.log', level=logging.ERROR, format='%(asctime)s:%(levelname)s:%(message)s')
