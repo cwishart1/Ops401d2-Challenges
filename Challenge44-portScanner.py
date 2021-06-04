@@ -9,8 +9,10 @@
 # Crashes when port is closed. Using 'try' with an exception would fix that but would go out of bounds of the given template.
 # Perhaps 'sockmod.connect' wasn't the intended function but eh
 
+# Import Lib
 import socket
 
+# Define Var
 sockmod = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 timeout = 3
 sockmod.settimeout(timeout)
@@ -18,10 +20,14 @@ sockmod.settimeout(timeout)
 hostip = input("Enter target IP: ")
 portno = input("Enter target port: ")
 
+# Function
 def portScanner(portno):
     if sockmod.connect((hostip, portno)): 
         print("Port closed")
     else:
         print("Port open")
 
+# Main
 portScanner(int(portno))
+
+# End
